@@ -362,18 +362,12 @@
                                                                     </Style>
                                                                 </Image.Style>
                                                             </Image>
-                                                            <ItemsControl
-                                                                Focusable="False"
-                                                                IsTabStop="False" 
-                                                                IsHitTestVisible="False" 
-                                                                ItemsSource="{Binding HostName, Converter={StaticResource HostNameColorConverter}}" 
-                                                                FlowDirection="LeftToRight">
-                                                                <ItemsControl.ItemsPanel>
-                                                                    <ItemsPanelTemplate>
-                                                                        <StackPanel Orientation="Horizontal"/>
-                                                                    </ItemsPanelTemplate>
-                                                                </ItemsControl.ItemsPanel>
-                                                            </ItemsControl>
+                                                            <TextBlock local:TextBlockExtensions.BindableInlines="{
+                                                                            Binding HostName, 
+                                                                            Converter={StaticResource HostNameColorConverter}
+                                                                       }"
+                                                                       IsHitTestVisible="False"
+                                                                       Focusable="False"/>
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>

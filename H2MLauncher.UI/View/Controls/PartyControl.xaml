@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="clr-namespace:H2MLauncher.UI"
              xmlns:local="clr-namespace:H2MLauncher.UI.View.Controls"
              xmlns:vm="clr-namespace:H2MLauncher.UI.ViewModels"
              MinWidth="150"
@@ -31,8 +32,9 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Name}" Foreground="White" FontSize="15" 
-                                        VerticalAlignment="Center" Margin="0,0,0,0">
+                                    <TextBlock ui:TextBlockExtensions.BindableInlines="{Binding Name, Converter={StaticResource HostNameColorConverter}}" 
+                                               Foreground="White" FontSize="15" 
+                                               VerticalAlignment="Center" Margin="0,0,0,0">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Style.Triggers>

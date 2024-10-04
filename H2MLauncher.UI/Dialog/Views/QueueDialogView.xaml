@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:H2MLauncher.UI"
              xmlns:converters="clr-namespace:H2MLauncher.UI.Converters"
              xmlns:vm="clr-namespace:H2MLauncher.UI.ViewModels"
              xmlns:model="clr-namespace:H2MLauncher.Core.Matchmaking.Models;assembly=H2MLauncher.Core"
@@ -77,26 +78,19 @@
                 HorizontalAlignment="Center" ClipToBounds="True" Height="25"
                 Visibility="{Binding CanEnterMatchmaking, Converter={StaticResource InverseBoolToVisibilityConverter}}">
             <TextBlock x:Name="serverName" SizeChanged="ServerNameTextBox_SizeChanged" Canvas.Left="0" 
-                       TextWrapping="NoWrap" HorizontalAlignment="Center">
-                <TextBlock.Inlines>
-                    <ItemsControl>
-                        <ItemsControl.Style>
-                            <Style TargetType="ItemsControl">
-                                <Setter Property="ItemsSource" Value="{Binding ServerHostName, Converter={StaticResource HostNameColorConverter}}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding State}" Value="{x:Static model:PlayerState.Matchmaking}">
-                                        <Setter Property="ItemsSource" Value="{Binding PlaylistName, Converter={StaticResource HostNameColorConverter}}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ItemsControl.Style>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </TextBlock.Inlines>
+                       TextWrapping="NoWrap" HorizontalAlignment="Center" FontFamily="Consolas">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="local:TextBlockExtensions.BindableInlines" 
+                                Value="{Binding ServerHostName, Converter={StaticResource HostNameColorConverter}}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding State}" Value="{x:Static model:PlayerState.Matchmaking}">
+                                <Setter Property="local:TextBlockExtensions.BindableInlines" 
+                                        Value="{Binding PlaylistName, Converter={StaticResource HostNameColorConverter}}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
                 <TextBlock.RenderTransform>
                     <TranslateTransform X="0"/>
                 </TextBlock.RenderTransform>

@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -18,6 +19,8 @@ public partial class HostNameColorConverter : IValueConverter
             return Array.Empty<Run>();
         }
 
+        Style? runStyle = parameter as Style;
+
         List<Run> runs = [];
         MatchCollection matches = ColorRegex().Matches(hostname);
         if (matches.Count != 0)
@@ -28,8 +31,7 @@ public partial class HostNameColorConverter : IValueConverter
                 {
                     Text = hostname[..matches[0].Index],
                     Foreground = Brushes.White,
-                    FlowDirection = System.Windows.FlowDirection.LeftToRight,
-                    FontFamily = Font,
+                    Style = runStyle
                 });
             }
             foreach (Match match in matches)
@@ -52,8 +54,7 @@ public partial class HostNameColorConverter : IValueConverter
                 {
                     Text = match.Groups[2].Value,
                     Foreground = brush,
-                    FlowDirection = System.Windows.FlowDirection.LeftToRight,
-                    FontFamily = Font,
+                    Style = runStyle
                 });
             }
         }
@@ -63,8 +64,7 @@ public partial class HostNameColorConverter : IValueConverter
             {
                 Text = hostname,
                 Foreground = Brushes.White,
-                FlowDirection = System.Windows.FlowDirection.LeftToRight,
-                FontFamily = Font
+                Style = runStyle
             });
         }
         return runs.ToArray();
